@@ -1,0 +1,47 @@
+<div>
+    <div class="item_details-score">
+        <h1>{{ item_details.item }} 的详细评分</h1>
+    </div>
+    <hr> <!-- 添加分割线 -->
+    <div class="item-details">
+        <p>总成绩：{{ item_details.total_score }}</p>
+        <hr> <!-- 添加分割线 -->
+        <h2>用户评分详情</h2>
+        <table class="score-table">
+            <thead>
+                <tr class="table-header">
+                    <th>用户名</th>
+                    <th>分数</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user, score in item_details.scores.items() %}
+                    <tr class="user-score-row">
+                        <td class="user-name">
+                            {{ user }}
+                        </td> <!-- 用户名 -->
+                        <td class="user-score">
+                            {% if score is none %}
+                                未评分
+                            {% else %}
+                                {% if user == item_details.highest_score_user or user == item_details.lowest_score_user %}
+                                    <s style="color: red;">{{ score }}</s>
+                                {% else %}
+                                    {{ score }}
+                                {% endif %}
+                            {% endif %}
+                        </td> <!-- 分数 -->
+                        <td class="score-marker">
+                            {% if user == item_details.highest_score_user %}
+                                <span class="highest">最高分</span>
+                            {% elif user == item_details.lowest_score_user %}
+                                <span class="lowest">最低分</span>
+                            {% endif %}
+                        </td> <!-- 标记 -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

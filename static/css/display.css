@@ -1,0 +1,252 @@
+/* 设置全局字体、背景和颜色 */
+body {
+  display: flex; /* 使用 Flexbox 布局 */
+  flex-direction: column; /* 主轴为垂直方向 */
+  font-family: Arial, sans-serif; /* 设置全局字体 */
+  background-color: #f4f4f4; /* 背景颜色 */
+  background-image: url('/static/images/banner2.jpg'); /* 背景图片 */
+  background-size: cover; /* 背景图片覆盖整个屏幕 */
+  background-position: center; /* 背景图片居中 */
+  background-repeat: no-repeat; /* 背景图片不重复 */
+  background-attachment: fixed; /* 背景图像固定 */
+  margin: 0; /* 移除外边距 */
+  padding: 0; /* 移除内边距 */
+  color: #ffffff; /* 全局文字颜色 */
+}
+
+/* 容器样式 */
+.container {
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: space-between; /* 子元素间距均匀分布 */
+  flex-wrap: wrap; /* 允许子元素换行 */
+  max-width: 90%; /* 容器最大宽度为父容器的 90% */
+  margin: 0vh auto; /* 上下外边距为 1vh，左右外边距自动居中 */
+  padding: 0.25vw; /* 内边距为视口宽度的 0.25% */
+  background-color: rgba(255, 255, 255, 0); /* 透明背景 */
+  box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.1); /* 阴影大小为视口宽度的 0.5% */
+  border-radius: 0.5vw; /* 圆角边框，半径为视口宽度的 0.5% */
+}
+
+/* 页眉样式 */
+header {
+    display: flex; /* 使用 flex 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: flex-start; /* 垂直靠上对齐 */
+    margin: 0vh auto; /* 上下外边距为 0%，左右外边距自动居中 */
+    padding: 0; /* 移除内边距 */
+    height: 12vh;
+    background-color: rgba(255, 255, 255, 0); /* 半透明背景 */
+    position: relative; /* 相对定位 */
+    background-image: url('/static/images/title.png'); /* 背景图片 */
+    background-size: 100% 100%;
+    z-index: 10; /* 确保 header 在背景图上方 */
+}
+
+/* 页眉标题样式 */
+header h1 {
+    padding: 1vh; /* 添加内边距 */
+    margin: 0; /* 移除外边距 */
+    font-size: 2vw; /* 字体大小为父容器字体大小的 2 倍 */
+    color: #ffffff; /* 文字颜色 */
+}
+
+/* 列样式 */
+.column {
+    display: flex; /* 使用 Flexbox 布局 */
+    flex-direction: column; /* 子元素垂直排列 */
+    gap: 0.625vw; /* 子元素间距为视口宽度的 0.625% */
+    width: 48%; /* 每列宽度为父容器的 48% */
+    max-width: 100%; /* 最大宽度为父容器的 100% */
+}
+
+/* 每组信息的样式 */
+.item-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding:0.5vh 0 0 0; /* 上内边距为视口宽度的 0.5% */
+    border-radius: 0.25vw; /* 圆角边框，半径为视口宽度的 0.5% */
+    height: 6.1vh; /* 高度为视口高度的 5% */
+    width: 100%; /* 宽度占满父容器 */
+    position: relative;
+    margin: 0.4vh 0vw; /* 上下外边距为 0%，左右外边距0% */
+}
+
+/* 奖牌图标样式 */
+.item-group .medal {
+    margin: 0 1vw; /* 上下外边距为 0%，左右外边距0.5% */
+    width: 2vw; /* 宽度为视口宽度的 2% */
+    height: 2.7vh; /* 高度为视口高度的 2% */
+    margin-right: 0.625vw; /* 右边距为视口宽度的 0.625% */
+}
+
+/* 发言人名字样式 */
+.item-group .speaker {
+    margin: 0 0.5vw; /* 上下外边距为 0%，左右外边距0.5% */
+    width: 7vw;
+    font-size: 0.9vw; /* 字体大小为视口宽度的 0.7% */
+    white-space: nowrap; /* 防止文字换行 */
+}
+
+/* 项目名样式 */
+.item-group h3 {
+    margin: 1vh 0.5vw; /* 上下外边距为 0%，左右外边距0.5% */
+    font-size: 0.9vw; /* 字体大小为视口宽度的 0.7% */
+    flex: 1; /* 占据剩余空间 */
+    white-space: normal; /* 可以文字换行 */
+
+}
+
+/* 分数样式 */
+.item-group .score {
+    margin: 0 1vw; /* 上下外边距为 0%，左右外边距0.5% */
+    font-size: 0.9vw; /* 字体大小为视口宽度的 0.7% */
+    text-decoration: none;
+    color: #ffffff;
+    white-space: nowrap; /* 防止文字换行 */
+
+}
+
+/* 奇数行的背景图 */
+.item-group:nth-child(odd) {
+    background-image: url('/static/images/11.png'); /* 奇数行背景图片 */
+}
+
+/* 偶数行的背景图 */
+.item-group:nth-child(even) {
+    background-image: url('/static/images/22.png'); /* 偶数行背景图片 */
+}
+
+/* 分数悬停样式 */
+.item-group .score:hover {
+    /* 不显示下划线 */
+}
+
+/* 模态框样式 */
+.modal {
+    display: none; /* 默认不显示 */
+    position: fixed; /* 固定定位 */
+    z-index: 1000; /* 确保模态框在最上层 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 宽度占满屏幕 */
+    height: 100%; /* 高度占满屏幕 */
+    background-color: rgba(0, 0, 0, 0.8); /* 深色半透明背景 */
+    overflow: auto; /* 允许滚动 */
+    padding-top: 10vh; /* 顶部内边距 */
+}
+
+/* 模态框内容样式 */
+.modal-content {
+    background-color: rgba(0, 32, 74, 0.75); /* 藏青色背景 */
+    color: #FFFFFF; /* 白色文字 */
+    margin: 5% auto; /* 上下外边距为 5%，左右外边距自动居中 */
+    padding: 3vw; /* 增大内边距 */
+    border-radius: 1vw; /* 圆角边框 */
+    border: 0.2vw solid #001533; /* 更深的藏青色边框 */
+    width: 90%; /* 增大宽度 */
+    max-width: 800px; /* 增大最大宽度 */
+    position: relative; /* 相对定位 */
+    z-index: 50; /* 确保内容在关闭按钮下方 */
+    box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.5); /* 深色阴影 */
+}
+
+/* 关闭按钮样式 */
+.close {
+    color: #FFFFFF; /* 白色文字 */
+    font-size: 1.5vw; /* 字体大小 */
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.2vw; /* 减小内边距 */
+    margin: 0; /* 无外边距 */
+    line-height: 1.5vw; /* 与按钮高度一致 */
+    display: block; /* 块级元素 */
+    text-align: center; /* 文字居中 */
+    width: 1.5vw; /* 按钮宽度 */
+    height: 1.5vw; /* 按钮高度 */
+    background-color: #001533; /* 更深的藏青色背景 */
+    border-radius: 50%; /* 圆形按钮 */
+    position: absolute; /* 绝对定位 */
+    top: 1vw; /* 距离顶部 1vw */
+    right: 1vw; /* 距离右侧 1vw */
+    z-index: 100; /* 确保按钮在最上层 */
+    transition: background-color 0.3s ease; /* 过渡效果 */
+}
+
+.close:hover,
+.close:focus {
+    background-color: #000000; /* 悬停时更深的背景 */
+}
+
+/* 模态框标题样式 */
+.modal-content h1 {
+    font-size: 1.2vw; /* 字体大小 */
+    margin: 0; /* 移除外边距 */
+    padding: 0; /* 移除内边距 */
+    text-align: center; /* 文字居中 */
+}
+
+/* 模态框内容的其他样式 */
+.modal-content p,
+.modal-content h2,
+.modal-content ul {
+    font-size: 1.2vw; /* 字体大小 */
+    margin: 1.2vw 0; /* 上下外边距 */
+    color: #FFFFFF; /* 白色文字 */
+}
+
+.modal-content ul {
+    list-style-type: none; /* 移除列表样式 */
+    padding: 0; /* 移除内边距 */
+}
+
+.modal-content li {
+    margin: 0.8vw 0; /* 上下外边距 */
+}
+/* 表格样式 */
+.score-table {
+    width: 100%; /* 表格宽度 */
+    border-collapse: collapse; /* 合并边框 */
+    border-spacing: 0; /* 移除单元格间距 */
+}
+
+/* 表头样式 */
+.table-header {
+    border-bottom: 3px solid #FFFFFF; /* 下边框加粗 */
+    color: #FFFFFF; /* 白色文字 */
+}
+
+.table-header th {
+    padding: 8px 16px; /* 表头内边距 */
+    text-align: center; /* 文字中对齐 */
+    font-size: 1.2vw; /* 字体大小 */
+}
+
+/* 表格内容样式 */
+.user-score-row {
+    border-bottom: 1px solid #FFFFFF; /* 横框线 */
+}
+
+.user-name, .user-score, .score-marker {
+    font-size: 1.2vw; /* 字体大小 */
+    color: #FFFFFF; /* 白色文字 */
+    text-align: center; /* 文字中对齐 */
+}
+
+
+/* 最高分和最低分的标记样式 */
+.highest {
+    color: #FFD700; /* 最高分标记为金色 */
+    font-weight: bold;
+}
+
+.lowest {
+    color: #C0C0C0; /* 最低分标记为银色 */
+    font-weight: bold;
+}
+.item_details-score{
+
+}
