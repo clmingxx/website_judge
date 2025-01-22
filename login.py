@@ -139,7 +139,6 @@ def display_item(item_name):
 
                 }
             break
-
     if item_details:
         return render_template('item_details.html', item_details=item_details)
     else:
