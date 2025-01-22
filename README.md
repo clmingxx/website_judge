@@ -56,3 +56,9 @@ Flask 3.1.0
 * 作者：溟同学
 * 邮箱：clmingxx@gmail.com
 * GitHub：[clmingxx/website\_judge: 评分网站](https://github.com/clmingxx/website_judge)
+### 其他功能
+* [ ] 能够对并列成绩进行区分
+* [ ] 数据打通数据库
+* [ ] 项目说明、主讲人图片
+* [ ] 管理员能够对项目、评委、打分分数进行增删改查
+* [ ] 域名访问以及部署到服务器
