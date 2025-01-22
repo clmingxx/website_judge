@@ -136,6 +136,7 @@ def display_item(item_name):
                     'item': item,
                     'total_score': '评分未完成',
                     'scores': {user: scores[user][item] for user in users}
+
                 }
             break
 
