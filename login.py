@@ -112,33 +112,51 @@ def display_item(item_name):
     item_details = None
     for item in items:
         if item == item_name:
+            # 获取所有评委的分数
             scores_list = [scores[user][item] for user in users if scores[user][item] is not None]
-            if len(scores_list) == len(users):  # 所有用户都已评分
-                total_score = sum(scores_list) / len(scores_list)
+            num_users = len(users)
+            num_scored = len(scores_list)
+            num_unscored = num_users - num_scored
+
+            # 初始化返回的数据
+            item_details = {
+                'item': item,
+                'num_users': num_users,
+                'num_unscored': num_unscored,
+                'scores_list': scores_list,
+                'highest_score_index': None,
+                'lowest_score_index': None,
+                'total_score': None
+            }
+
+            if num_scored == num_users:  # 所有评委都已评分
+                if num_users <= 2:
+                    # 评委数 ≤ 2：计算平均分
+                    total_score = sum(scores_list) / num_users
+                else:
+                    # 评委数 > 2：去掉一个最高分和一个最低分后计算平均分
+                    sorted_scores = sorted(scores_list)
+                    trimmed_scores = sorted_scores[1:-1]
+                    total_score = sum(trimmed_scores) / len(trimmed_scores)
+
+                # 获取最高分和最低分及其索引
                 highest_score = max(scores_list)
                 lowest_score = min(scores_list)
+                highest_score_index = scores_list.index(highest_score)
+                lowest_score_index = scores_list.index(lowest_score)
 
-                # 找到最高分和最低分的用户
-                highest_score_user = next(user for user in users if scores[user][item] == highest_score)
-                lowest_score_user = next(user for user in users if scores[user][item] == lowest_score)
-
-                item_details = {
-                    'item': item,
+                item_details.update({
                     'total_score': round(total_score, 2),
-                    'scores': {user: scores[user][item] for user in users},
                     'highest_score': highest_score,
-                    'highest_score_user': highest_score_user,
+                    'highest_score_index': highest_score_index,
                     'lowest_score': lowest_score,
-                    'lowest_score_user': lowest_score_user
-                }
+                    'lowest_score_index': lowest_score_index
+                })
             else:
-                item_details = {
-                    'item': item,
-                    'total_score': '评分未完成',
-                    'scores': {user: scores[user][item] for user in users}
+                item_details['total_score'] = f'评分未完成（{num_unscored}位评委未打分）'
 
-                }
             break
+
     if item_details:
         return render_template('item_details.html', item_details=item_details)
     else:

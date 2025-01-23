@@ -10,33 +10,35 @@
         <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
         <h1>管理面板</h1>
         <h2>项目分数</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>项目</th>
-                    {% for user in users %}
-                        <th>{{ user }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
+        <div style="overflow: auto; max-height: 70vh; max-width: 80vw;">
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ item }}</td>
+                        <th>项目</th>
                         {% for user in users %}
-                            <td>
-                                {% if scores[user][item] is none %}
-                                    <span class="unscored">未打分</span>
-                                {% else %}
-                                    {{ scores[user][item] }}
-                                {% endif %}
-                            </td>
+                            <th>{{ user }}</th>
                         {% endfor %}
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="{{ url_for('display') }}" class="display-button">查看比赛结果</a>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item }}</td>
+                            {% for user in users %}
+                                <td>
+                                    {% if scores[user][item] is none %}
+                                        <span class="unscored">未打分</span>
+                                    {% else %}
+                                        {{ scores[user][item] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+    <a href="{{ url_for('display') }}" class="display-button">查看比赛结果</a>
 </body>
 </html>

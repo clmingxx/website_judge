@@ -124,34 +124,70 @@ header h1 {
 .item-group .score:hover {
     /* 不显示下划线 */
 }
-
-/* 模态框样式 */
-.modal {
-    display: none; /* 默认不显示 */
-    position: fixed; /* 固定定位 */
-    z-index: 1000; /* 确保模态框在最上层 */
-    left: 0;
-    top: 0;
-    width: 100%; /* 宽度占满屏幕 */
-    height: 100%; /* 高度占满屏幕 */
-    background-color: rgba(0, 0, 0, 0.8); /* 深色半透明背景 */
-    overflow: auto; /* 允许滚动 */
-    padding-top: 10vh; /* 顶部内边距 */
+/* 定义弹窗的淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-/* 模态框内容样式 */
+/* 定义弹窗的淡出动画 */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    padding-top: 0vh;
+    opacity: 0; /* 初始透明度为 0 */
+    transform: scale(1); /* 初始缩放为 0.9 */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* 平滑过渡 */
+    backdrop-filter: blur(15px); /* 背景模糊效果 */
+}
+
+.modal.show {
+    display: block; /* 显示弹窗 */
+    animation: fadeIn 0.3s forwards; /* 使用 fadeIn 动画 */
+}
+
+.modal.hide {
+    animation: fadeOut 0.3s forwards; /* 使用 fadeOut 动画 */
+}
+
 .modal-content {
-    background-color: rgba(0, 32, 74, 0.75); /* 藏青色背景 */
-    color: #FFFFFF; /* 白色文字 */
-    margin: 5% auto; /* 上下外边距为 5%，左右外边距自动居中 */
-    padding: 3vw; /* 增大内边距 */
-    border-radius: 1vw; /* 圆角边框 */
-    border: 0.2vw solid #001533; /* 更深的藏青色边框 */
-    width: 90%; /* 增大宽度 */
-    max-width: 800px; /* 增大最大宽度 */
-    position: relative; /* 相对定位 */
-    z-index: 50; /* 确保内容在关闭按钮下方 */
-    box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.5); /* 深色阴影 */
+    background-color: rgba(0, 32, 74, 0.75);
+    color: #FFFFFF;
+    margin: 5% auto;
+    padding: 3vw;
+    border-radius: 1vw;
+    border: 0.2vw solid #001533;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    z-index: 50;
+    box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.5);
+    transform: scale(1); /* 默认大小 */
+    backdrop-filter: none; /* 确保内容不模糊 */
 }
 
 /* 关闭按钮样式 */
@@ -206,47 +242,59 @@ header h1 {
 .modal-content li {
     margin: 0.8vw 0; /* 上下外边距 */
 }
-/* 表格样式 */
-.score-table {
-    width: 100%; /* 表格宽度 */
-    border-collapse: collapse; /* 合并边框 */
-    border-spacing: 0; /* 移除单元格间距 */
+/* 分数容器样式 */
+.score-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* 子元素靠左侧对齐 */
+    gap: 1vw; /* 分数之间的间距 */
+    max-height: 35vh; /* 初始展示5行，每行高度约4vh */
+    overflow-y: auto; /* 超过5行后开启滚动条 */
+    background-color: rgba(255, 255, 255, 0.1); /* 半透明背景 */
+    border-radius: 0.5vw; /* 减小圆角大小 */
+    padding: 1vh; /* 内边距 */
+    margin-top: 2vh; /* 上外边距 */
 }
 
-/* 表头样式 */
-.table-header {
-    border-bottom: 3px solid #FFFFFF; /* 下边框加粗 */
-    color: #FFFFFF; /* 白色文字 */
-}
-
-.table-header th {
-    padding: 8px 16px; /* 表头内边距 */
-    text-align: center; /* 文字中对齐 */
+/* 分数元素样式 */
+.score-item {
+    background-color: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+    padding: 0.5vw; /* 内边距 */
+    border-radius: 0.5vw; /* 圆角大小 */
+    width: calc(15%); /* 每行5个元素，考虑间距 */
+    text-align: center; /* 文字居中 */
     font-size: 1.2vw; /* 字体大小 */
+    color: #ffffff; /* 文字颜色 */
+    white-space: nowrap; /* 防止文字换行 */
+    margin-bottom: 0.5vh; /* 添加底部间距 */
 }
 
-/* 表格内容样式 */
-.user-score-row {
-    border-bottom: 1px solid #FFFFFF; /* 横框线 */
+/* 最高分和最低分的样式 */
+.score-item.highest {
+    background-color: rgba(0, 255, 0, 0.3); /* 绿色背景 */
+    text-decoration: line-through; /* 删除线 */
 }
 
-.user-name, .user-score, .score-marker {
-    font-size: 1.2vw; /* 字体大小 */
-    color: #FFFFFF; /* 白色文字 */
-    text-align: center; /* 文字中对齐 */
+.score-item.lowest {
+    background-color: rgba(255, 0, 0, 0.3); /* 红色背景 */
+    text-decoration: line-through; /* 删除线 */
 }
 
-
-/* 最高分和最低分的标记样式 */
-.highest {
-    color: #FFD700; /* 最高分标记为金色 */
-    font-weight: bold;
+/* 滚动条样式 */
+.score-container::-webkit-scrollbar {
+    width: 0.5vw; /* 滚动条宽度 */
 }
 
-.lowest {
-    color: #C0C0C0; /* 最低分标记为银色 */
-    font-weight: bold;
+.score-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* 滚动条轨道颜色 */
+    border-radius: 0.25vw; /* 滚动条轨道圆角 */
 }
-.item_details-score{
 
+.score-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3); /* 滚动条滑块颜色 */
+    border-radius: 0.25vw; /* 滑块圆角 */
+}
+
+.score-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5); /* 滚动条滑块悬停颜色 */
 }

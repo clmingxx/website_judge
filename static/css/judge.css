@@ -33,7 +33,7 @@ label {
 input[type="text"],
 input[type="password"],
 input[type="number"] {
-    background-color: #e6f7ff; /* 输入框背景色与容器渐变色一致 */
+    background-color: #f2ffff; /* 输入框背景色与容器渐变色一致 */
     width: 5vw; /* 设置输入框宽度为两位数 */
     padding: 1vw;
     margin-top: 0.5vw;
