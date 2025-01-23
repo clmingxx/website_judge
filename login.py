@@ -129,31 +129,35 @@ def display_item(item_name):
                 'total_score': None
             }
 
-            if num_scored == num_users:  # 所有评委都已评分
-                if num_users <= 2:
-                    # 评委数 ≤ 2：计算平均分
-                    total_score = sum(scores_list) / num_users
-                else:
-                    # 评委数 > 2：去掉一个最高分和一个最低分后计算平均分
-                    sorted_scores = sorted(scores_list)
-                    trimmed_scores = sorted_scores[1:-1]
-                    total_score = sum(trimmed_scores) / len(trimmed_scores)
-
-                # 获取最高分和最低分及其索引
+            if num_scored > 1:  # 至少有2个评委打分
+                # 获取现有分数中的最高分和最低分及其索引
                 highest_score = max(scores_list)
                 lowest_score = min(scores_list)
                 highest_score_index = scores_list.index(highest_score)
                 lowest_score_index = scores_list.index(lowest_score)
 
                 item_details.update({
-                    'total_score': round(total_score, 2),
                     'highest_score': highest_score,
                     'highest_score_index': highest_score_index,
                     'lowest_score': lowest_score,
                     'lowest_score_index': lowest_score_index
                 })
+
+                if num_scored == num_users:  # 所有评委都已评分
+                    if num_users <= 2:
+                        # 评委数 ≤ 2：计算平均分
+                        total_score = sum(scores_list) / num_users
+                    else:
+                        # 评委数 > 2：去掉一个最高分和一个最低分后计算平均分
+                        sorted_scores = sorted(scores_list)
+                        trimmed_scores = sorted_scores[1:-1]
+                        total_score = sum(trimmed_scores) / len(trimmed_scores)
+
+                    item_details['total_score'] = round(total_score, 2)
+                else:
+                    item_details['total_score'] = f'评分未完成（{num_unscored}位评委未打分）'
             else:
-                item_details['total_score'] = f'评分未完成（{num_unscored}位评委未打分）'
+                item_details['total_score'] = '暂无评分'
 
             break
 
