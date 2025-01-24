@@ -1,8 +1,31 @@
+// 主界面定时刷新逻辑
+let refreshInterval = null;
+
+function startAutoRefresh() {
+    // 每10秒刷新一次页面
+    refreshInterval = setInterval(() => {
+        window.location.reload();  // 刷新页面
+    }, 10000);  // 10000毫秒 = 10秒
+}
+
+function stopAutoRefresh() {
+    // 停止刷新
+    if (refreshInterval) {
+        clearInterval(refreshInterval);
+    }
+}
+
+// 页面加载时开始自动刷新
+window.onload = startAutoRefresh;
+
 // 加载项目详情到模态框
 function loadItemDetails(itemName) {
     const modal = document.getElementById('item-details-modal');
     modal.style.display = 'block'; // 确保弹窗可见
     modal.classList.add('show'); // 添加 show 类以触发动画
+
+    // 暂停主界面的自动刷新
+    stopAutoRefresh();
 
     // 使用 AJAX 请求项目详情
     fetch(`/display/${encodeURIComponent(itemName)}`)
@@ -39,6 +62,12 @@ function closeModal() {
             console.log("停止自动滚动...");
             stopAutoScroll(scoreContainer);
         }
+
+        // 恢复主界面的自动刷新
+        startAutoRefresh();
+
+        // 弹窗关闭时手动刷新一次页面
+        window.location.reload();
     }, { once: true });
 }
 
